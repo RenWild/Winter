@@ -45,6 +45,7 @@ Board SampleEval(Board board);
 Score QSearch(Board &board);
 Score SQSearch(Board &board);
 Score get_last_search_score();
+size_t get_num_nodes();
 void set_print_info(bool print_info);
 void end_search();
 Board get_sampled_board();
@@ -71,10 +72,21 @@ void SetContempt(int contempt);
 void SetArmageddon(bool armageddon);
 
 #ifdef TUNE
-void SetInitialAspirationDelta(NScore delta);
-void SetFutilityMargin(NScore score);
-void SetSNMPMargin(NScore score);
-void SetLMRDiv(double div);
+void SetInitialAspirationDelta(int32_t delta);
+void SetFutilityMargin(int32_t score);
+void SetSNMPMargin(int32_t score);
+void SetLMROffset(int32_t value);
+void SetLMRMultiplier(int32_t value);
+void SetLMROffsetPV(int32_t value);
+void SetLMRMultiplierPV(int32_t value);
+void SetLMROffsetCap(int32_t value);
+void SetLMRMultiplierCap(int32_t value);
+void SetLMROffsetPVCap(int32_t value);
+//void SetLMRMultiplierPVCap(int32_t value);
+void SetLMP1(int32_t value);
+void SetLMP2(int32_t value);
+void SetLMP3(int32_t value);
+void SetLMP4(int32_t value);
 #endif
 
 }

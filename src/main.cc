@@ -26,20 +26,26 @@
 #include "learning/linear_algebra.h"
 #include "general/magic.h"
 #include "general/settings.h"
-#include "general/debug.h"
-#include "general/bookkeeping.h"
 #include "board.h"
 #include "search.h"
 #include "learning/cluster.h"
 
 #include "net_evaluation.h"
 
-int main() {
-  debug::EnterFunction(debug::kMain, "Main", "");
+bool Equals(std::string string_a, std::string string_b) {
+  return string_a.compare(string_b) == 0;
+}
+
+int main(int argc, char **argv) {
   table::SetTableSize(32);
 
   search::LoadSearchVariablesHardCoded();
   net_evaluation::init_weights();
+
+  if (argc > 1 && Equals(argv[1], "bench")) {
+    benchmark::RunBenchCommand(argc, argv);
+    return 0;
+  }
 
 //  train::RunEMForNFCM();
 //  evaluation::RunEMForGMM();
@@ -49,7 +55,7 @@ int main() {
 //  net_evaluation::GenerateDatasetFromEPD();
 //  benchmark::ZuriChessDatasetLoss();
 //  net_evaluation::EstimateFeatureImpact();
-//  std::cout << "Startpos eval: " << net_evaluation::ScoreBoard(Board()) << std::endl;
+//  std::cout << "Startpos eval: " << net_evaluation::ScoreBoard(Board()).to_wpct() << std::endl;
 
   //search::SaveHardcodeSearchVariables();
 
@@ -69,6 +75,5 @@ int main() {
   //benchmark::TimeToDepthSuite();
   //parse::Save2dVecToCSV<Score>(vecvec,"data/test.csv");
   uci::Loop();
-  debug::ExitFunction(debug::kMain);
   return 0;
 }

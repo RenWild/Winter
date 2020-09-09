@@ -1,15 +1,15 @@
 #If you have clang, it seems to generate a faster compile as of the beginning of 2018
 #CC=g++
 CC=clang++
-CFLAGS=-c -DNDEBUG -O3 -flto -g3 -Wall -Wno-sign-compare -m64 -march=native -std=c++11 -Isrc -Isrc/general -Isrc/learning
+CFLAGS=-c -DNDEBUG -O3 -flto -Wall -Wno-sign-compare -m64 -march=native -std=c++11 -Isrc -Isrc/general -Isrc/learning
 LDFLAGS=-flto -Wall
 SOURCES=$(wildcard src/general/*.cc src/learning/*.cc src/*.cc)
 OBJECTS=$(SOURCES:.cc=.o)
-EXECUTABLE:=Winter
+EXE:=Winter
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(SOURCES) $(EXE)
 
-$(EXECUTABLE): $(OBJECTS) 
+$(EXE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ -lpthread
 
 .cc.o:
